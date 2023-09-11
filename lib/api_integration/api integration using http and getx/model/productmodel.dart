@@ -1,14 +1,15 @@
 // To parse this JSON data, do
-//
-//     final welcome = welcomeFromJson(jsonString);
+//     final productModel = productModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Welcome> welcomeFromJson(String str) => List<Welcome>.from(json.decode(str).map((x) => Welcome.fromJson(x)));
+List<ProductModel> productModelFromJson(String str) =>
+    List<ProductModel>.from(json.decode(str).map((x) => ProductModel.fromJson(x)));//  x as map
 
-String welcomeToJson(List<Welcome> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String productModelToJson(List<ProductModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Welcome {
+class ProductModel {
   int? id;
   String? title;
   double? price;
@@ -17,7 +18,7 @@ class Welcome {
   String? image;
   Rating? rating;
 
-  Welcome({
+  ProductModel({
     this.id,
     this.title,
     this.price,
@@ -27,12 +28,12 @@ class Welcome {
     this.rating,
   });
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(  // json = x
     id: json["id"],
     title: json["title"],
     price: json["price"]?.toDouble(),
     description: json["description"],
-    category: json["category"]!,
+    category: json["category"],
     image: json["image"],
     rating: json["rating"] == null ? null : Rating.fromJson(json["rating"]),
   );
@@ -47,14 +48,14 @@ class Welcome {
     "rating": rating?.toJson(),
   };
 }
-//
+
 // enum Category {
 //   ELECTRONICS,
 //   JEWELERY,
 //   MEN_S_CLOTHING,
 //   WOMEN_S_CLOTHING
 // }
-
+//
 // final categoryValues = EnumValues({
 //   "electronics": Category.ELECTRONICS,
 //   "jewelery": Category.JEWELERY,
